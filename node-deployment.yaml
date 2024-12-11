@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata:  
   name: nodejs-deployment
   labels:
     app: nodejs
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: nodejs
@@ -16,26 +16,27 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: nodejs-img
+        image: kerem332/nodeimage-selim:latest
+        command: ["node", "index.js"]
         ports:
         - containerPort: 8001
         env:
         - name: DB_HOST
-          value: "mysql-service" # MySQL Service adı
+          value: "10.42.0.145" 
         - name: DB_USER
           value: "root"
         - name: DB_PASSWORD
-          value: "Mysql123!"
+          value: "Mysql123!" 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nodejs-service
-spec:
+spec:  
   selector:
     app: nodejs
   ports:
   - protocol: TCP
-    port: 80
+    port: 80 # Daha standart bir port
     targetPort: 8001
   type: LoadBalancer

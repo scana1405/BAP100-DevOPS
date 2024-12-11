@@ -13,10 +13,6 @@ spec:
       value: "Mysql123!"
     - name: MYSQL_DATABASE
       value: "main_db"
-    - name: MYSQL_USER
-      value: "root"
-    - name: MYSQL_PASSWORD
-      value: "Mysql123!"
     ports:
     - containerPort: 3306
 ---
@@ -31,4 +27,5 @@ spec:
   - protocol: TCP
     port: 3306
     targetPort: 3306
-  clusterIP: None # Headless Service (Opsiyonel)
+  clusterIP: None # Headless Service opsiyonel
+  type: ClusterIP
